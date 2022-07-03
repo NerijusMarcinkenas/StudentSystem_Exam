@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StudentSystem_Repository.DataAccess;
 
@@ -11,9 +12,10 @@ using StudentSystem_Repository.DataAccess;
 namespace StudentSystem_Repository.Migrations
 {
     [DbContext(typeof(StudentContext))]
-    partial class StudentContextModelSnapshot : ModelSnapshot
+    [Migration("20220630164746_PersonalCodeBigIntUpdate")]
+    partial class PersonalCodeBigIntUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +36,7 @@ namespace StudentSystem_Repository.Migrations
 
                     b.HasIndex("LecturesId");
 
-                    b.ToTable("DepartmentLecture", (string)null);
+                    b.ToTable("DepartmentLecture");
                 });
 
             modelBuilder.Entity("LectureStudent", b =>
@@ -49,7 +51,7 @@ namespace StudentSystem_Repository.Migrations
 
                     b.HasIndex("StudentsId");
 
-                    b.ToTable("LectureStudent", (string)null);
+                    b.ToTable("LectureStudent");
                 });
 
             modelBuilder.Entity("StudentSystem_Repository.Entities.Department", b =>
@@ -65,7 +67,7 @@ namespace StudentSystem_Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Departments", (string)null);
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("StudentSystem_Repository.Entities.Lecture", b =>
@@ -81,7 +83,7 @@ namespace StudentSystem_Repository.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Lectures", (string)null);
+                    b.ToTable("Lectures");
                 });
 
             modelBuilder.Entity("StudentSystem_Repository.Entities.Student", b =>
@@ -109,7 +111,7 @@ namespace StudentSystem_Repository.Migrations
 
                     b.HasIndex("DepartmentId");
 
-                    b.ToTable("Students", (string)null);
+                    b.ToTable("Students");
                 });
 
             modelBuilder.Entity("DepartmentLecture", b =>

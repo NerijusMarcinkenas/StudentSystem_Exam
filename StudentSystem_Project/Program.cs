@@ -1,4 +1,5 @@
 ﻿using StudentSystem_BusinessLogic;
+using StudentSystem_Project.UserInterface;
 
 namespace StudentSystem_Project
 {
@@ -6,8 +7,13 @@ namespace StudentSystem_Project
     {
         static void Main(string[] args)
         {
-            var service = new StudentService();
-            service.PopulateDb();
+            while (true)
+            {
+                var menu = new UserInterface.UserInterface();
+                menu.OpenMenu();
+            }
+         
+
         }
     }
 }

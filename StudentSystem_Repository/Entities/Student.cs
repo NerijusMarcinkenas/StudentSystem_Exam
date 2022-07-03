@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace StudentSystem_Repository.Entities
@@ -6,6 +7,10 @@ namespace StudentSystem_Repository.Entities
     public class Student
     {
         public Guid Id { get; set; }
+
+        [Required]
+        [Column(TypeName = ("bigint"))]
+        public ulong PersonalCode { get; set; }
 
         [ForeignKey("Department")]
         public Guid DepartmentId { get; set; }
@@ -20,10 +25,13 @@ namespace StudentSystem_Repository.Entities
         public List<Lecture> Lectures { get; set; }
         public Department Department { get; set; }
         public Student(){}
-        public Student(string name, string lastName)
+        
+        public Student(string name, string lastName, ulong personalCode)
         {
             Name = name;
-            Name = lastName;
+            LastName = lastName;
+            PersonalCode = personalCode;
+            Department = new Department();            
             Lectures = new List<Lecture>();            
         }
     }

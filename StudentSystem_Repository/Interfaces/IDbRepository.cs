@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using StudentSystem_Repository.Entities;
 
 namespace StudentSystem_Repository.Interfaces
 {
     public interface IDbRepository
     {
+        void UpdateDepartament(Department department);
+
 
     }
 }
