@@ -11,7 +11,7 @@ using StudentSystem_Repository.DataAccess;
 
 namespace StudentSystem_Repository.Migrations
 {
-    [DbContext(typeof(StudentContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20220630160406_LectureStudentsAdded")]
     partial class LectureStudentsAdded
     {

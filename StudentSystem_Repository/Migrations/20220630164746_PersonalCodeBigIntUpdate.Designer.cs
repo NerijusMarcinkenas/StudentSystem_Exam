@@ -11,7 +11,7 @@ using StudentSystem_Repository.DataAccess;
 
 namespace StudentSystem_Repository.Migrations
 {
-    [DbContext(typeof(StudentContext))]
+    [DbContext(typeof(DatabaseContext))]
     [Migration("20220630164746_PersonalCodeBigIntUpdate")]
     partial class PersonalCodeBigIntUpdate
     {

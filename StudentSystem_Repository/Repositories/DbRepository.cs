@@ -7,11 +7,11 @@ namespace StudentSystem_Repository.Repositories
 {    
     public class DbRepository //To do Implement IDbRepository
     {
-        private readonly StudentContext _context;
+        private readonly DatabaseContext _context;
 
         public DbRepository()
         {
-            _context = new StudentContext();
+            _context = new DatabaseContext();
         }
 
         public void AddUpdateDepartment(Department department)
@@ -26,6 +26,15 @@ namespace StudentSystem_Repository.Repositories
             }
            
         }       
+        public bool RemoveDepartment(Department department)
+        {
+            if (_context.Departments.Any( d => d.Id == department.Id))
+            {                
+                _context.Departments.Remove(department);
+                return true;
+            }
+            return false;
+        }
         public bool AddUpdateStudent(Student student)
         {
             if (!_context.Students.Any( n => n.PersonalCode == student.PersonalCode))
@@ -35,7 +44,17 @@ namespace StudentSystem_Repository.Repositories
             }
             else
             {
-                _context.Update(student);
+                _context.Students.Update(student);
+                return false;
+            }
+           
+        }
+        public bool RemoveStudent(Student student)
+        {
+            if (_context.Students.Any(s => s.PersonalCode == student.PersonalCode))
+            {
+                _context.Students.Remove(student);
+                return true;
             }
             return false;
         }
@@ -49,6 +68,7 @@ namespace StudentSystem_Repository.Repositories
             if (dbStudent is not null)
             {
                 dbStudent.Department = department;
+                dbStudent.Lectures = new List<Lecture>();
                 _context.Students.Update(dbStudent);
             }
             else
@@ -80,6 +100,12 @@ namespace StudentSystem_Repository.Repositories
             _context.Departments.Update(dbDepartament);
             return true;
         }
+        public void RemoveDepartmentLecture(Department department, Lecture lecture)
+        {
+            var dbDepartment = RetrieveDepartament(department.Id);
+            dbDepartment.Lectures.Remove(lecture);
+            _context.Departments.Update(dbDepartment);
+        }
         public bool AddLecture(Lecture lecture)
         {
             if (_context.Lectures.Any(l => l.Name.ToUpper() == lecture.Name.ToUpper()))
@@ -97,12 +123,12 @@ namespace StudentSystem_Repository.Repositories
         {
             return _context.Departments.Include(l => l.Lectures).SingleOrDefault(i => i.Id == department.Id).Lectures.ToList();
         }
-        public Department RetrieveDepartament(string name)
+        public Department RetrieveDepartament(Guid id)
         {
            return _context.Departments
                 .Include(l => l.Lectures)
                 .Include( s => s.Students)
-                .SingleOrDefault( n => n.Name.ToUpper() == name.ToUpper() );
+                .SingleOrDefault( n => n.Id == id );
         }
         public List<Department> RetrieveDepartments()
         {
@@ -110,8 +136,12 @@ namespace StudentSystem_Repository.Repositories
         }
         public Student RetrieveStudent(ulong studentCode)
         {
-            return _context.Students.Include( l => l.Lectures).SingleOrDefault(c => c.PersonalCode == studentCode);
+            return _context.Students
+                .Include( l => l.Lectures)
+                .Include(d => d.Department)
+                .SingleOrDefault(c => c.PersonalCode == studentCode);
         }
+        public List<Student> RetrieveStudents() => _context.Students.Include(d => d.Department).ToList();
         public bool IsDepartmentExist(string name) => _context.Departments.Any(n => n.Name.ToUpper() == name.ToUpper());
         public void SaveChanges()
         {

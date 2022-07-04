@@ -10,7 +10,7 @@ using StudentSystem_Repository.DataAccess;
 
 namespace StudentSystem_Repository.Migrations
 {
-    [DbContext(typeof(StudentContext))]
+    [DbContext(typeof(DatabaseContext))]
     partial class StudentContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

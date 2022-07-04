@@ -34,5 +34,10 @@ namespace StudentSystem_Repository.Entities
             Department = new Department();            
             Lectures = new List<Lecture>();            
         }
+
+        public override string ToString()
+        {
+            return $"{Name} {LastName} {PersonalCode} assigned to {Department.Name} department";
+        }
     }
 }

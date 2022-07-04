@@ -8,12 +8,15 @@ namespace StudentSystem_Project
 {
     internal static class Common
     {
-        public static ulong PersonalCodeParse(string input)
+        public static ulong PersonalCodeParse()
         {
+           
             bool succes = false;
             ulong parsedCode;
             do
             {
+                Console.Write("Enter Personal Code: ");
+                var input = Console.ReadLine();
                 if (input.Length > 19)
                 {
                     Console.WriteLine("Code is to long");                    
@@ -33,11 +36,12 @@ namespace StudentSystem_Project
         }
         public static int IntParse()
         {
-            var input = Console.ReadLine();
             bool succes = false;
             int number;
             do
-            {               
+            {
+                var input = Console.ReadLine();
+               
                 if (!int.TryParse(input, out number))
                 {
                     Console.WriteLine("Wrong input");
@@ -56,8 +60,22 @@ namespace StudentSystem_Project
             int j = 1;
             for (int i = 0; i < items.Count; i++)
             {
-                Console.WriteLine($"[{j}] - {items[i]}\n");
+                Console.WriteLine($"[{j++}] - {items[i]}");
             }
+        }
+        public static T TryGet<T>(List<T> values, int index)
+        {
+            index -= 1;
+            T value = default;
+            try
+            {
+                value = values[index];
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                Console.WriteLine("Selection was out of range");
+            }
+            return value;
         }
     }
 }

@@ -7,7 +7,7 @@ namespace StudentSystem_Repository.Entities
         public Guid Id { get; set; }
 
         [Required]
-        [Column(TypeName = ("nvarchar(50)"))]
+        [Column(TypeName = ("nvarchar(50)"))] 
         public string Name { get; set; }
         public List<Student> Students { get; set; }
         public List<Lecture> Lectures { get; set; }
@@ -17,6 +17,10 @@ namespace StudentSystem_Repository.Entities
             Name = name;
             Students = new List<Student>();
             Lectures = new List<Lecture>();
+        }
+        public override string ToString()
+        {
+            return $"{Name} ";
         }
     }
 }

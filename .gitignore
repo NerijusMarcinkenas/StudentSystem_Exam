@@ -1,12 +1,6 @@
 #Ignore thumbnails created by Windows
 Thumbs.db
 #Ignore files built by Visual Studio
-*.pptx
-*.jpg
-*.xlsx
-*.txt
-*.png
-*.docx
 *.obj
 *.exe
 *.pdb

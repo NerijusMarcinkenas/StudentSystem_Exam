@@ -4,7 +4,7 @@ using StudentSystem_Repository.Interfaces;
 
 namespace StudentSystem_Repository.DataAccess
 {
-    public class StudentContext : DbContext, IStudentContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<Department> Departments { get; set; }
         public DbSet<Lecture> Lectures { get; set; }
