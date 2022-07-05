@@ -7,11 +7,10 @@ namespace StudentSystem_Project
     {
         static void Main(string[] args)
         {
-            while (true)
-            {
-                var menu = new UserInterface.UserInterface();
-                menu.OpenMenu();
-            }
+            
+            var menu = new UserInterface.UserInterface();
+            menu.OpenMenu();
+            
          
 
         }

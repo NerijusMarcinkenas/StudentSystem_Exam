@@ -22,21 +22,27 @@ namespace StudentSystem_Project.UserInterface
             switch (selection)
             {
                 case 1:
+                    Console.Clear();
                     CreateStudent();
                     break;
                 case 2:
+                    Console.Clear();
                     RemoveStudent();
                     break;
-                case 3:                   
+                case 3:
+                    Console.Clear();
                     AssignLecturesToStudent();
                     break;
-                case 4:                     
+                case 4:
+                    Console.Clear();
                     RemoveStudentLectures();
                     break;
                 case 5:
+                    Console.Clear();
                     AssignStudentToDepartment();
                     break;
                 case 6:
+                    Console.Clear();
                     ShowStudentLectures();
                     break;
                 default:
@@ -48,19 +54,18 @@ namespace StudentSystem_Project.UserInterface
             Console.Write("Please enter name: ");
             var name = Console.ReadLine();
             Console.Write("Enter last name: ");
-            var lastName = Console.ReadLine();
-            
-            var personalCode = Common.PersonalCodeParse();
-            var department = GetDepartment();
-           
-            var depName = Console.ReadLine();
-            var student = new Student(name, lastName, personalCode);
-            var isAssigned = _studentService.AssignStudentToDepartment(student, department.Id);
-            if (isAssigned)
+            var lastName = Console.ReadLine();            
+            var personalCode = Common.PersonalCodeParse();          
+           var successfull = _studentService.CreateStudent(name,lastName,personalCode);
+            if (successfull)
             {
-                Console.WriteLine($"Student assigned to {depName} successfully");
+                Console.WriteLine("Student created successfully");
             }
-
+            else
+            {
+                Console.WriteLine("Personal code already exist");
+            }
+            Common.PressAnyKey();
         }
         private void RemoveStudent()
         {
@@ -69,31 +74,41 @@ namespace StudentSystem_Project.UserInterface
             {
                 if (_studentService.RemoveStudent(student))
                 {
-                    Console.WriteLine("Student was removed");
+                    Console.WriteLine($"{student} was removed");
                     return;
                 }
                 Console.WriteLine($"Student {student.Name} with personal code -({student.PersonalCode}) was not found");
                 return;
             }
-            Console.WriteLine("Student not found");
-
-
+            else
+            {
+                Console.WriteLine("Student not found");
+            }           
+            Common.PressAnyKey();
         }
         private void AssignLecturesToStudent()
         {
             var student = GetStudentByPersonalCode();
-            var dbLectures = _studentService.GetLectures(student.Department);
-            int j = 1;
-            int index;
+            if (student.Department is null)
+            {
+                Console.WriteLine("Student department is not assigned");
+                return;
+            }
+
+            var dbLectures = _studentService.GetDepartmentLectures(student.Department);           
+            int index;        
+
             do
             {
-                Console.WriteLine("Please select lecture to assign, or [0] to go back:");
-                Common.ShowItems(dbLectures);
-                index = Common.IntParse();
-                var lecture = Common.TryGet(dbLectures, index);
+                Console.Clear();                
+                Console.WriteLine("Please select lecture to assign:");
+
+                Common.ShowItems(dbLectures);               
+                index = Common.IntParse();                
+                var lecture = Common.TryGetItem(dbLectures, index);
                 if (lecture is null)
                 {
-                    Console.WriteLine("Lecture doesn't exist");
+                    Console.WriteLine("Lecture doesn't exist");                 
                 }
                 else if (student.Lectures.Any(n => n.Name == lecture.Name))
                 {
@@ -102,24 +117,36 @@ namespace StudentSystem_Project.UserInterface
                 else
                 {
                     student.Lectures.Add(lecture);
+                    Console.WriteLine($"{lecture} assigned successfully");
                 }
-
-            } while (index != -1);
+                Console.WriteLine("Press enter to continue, any key to go back");
+            } while (Console.ReadKey().Key == ConsoleKey.Enter);
             _studentService.AddUpdateStudent(student);
-            
-        }
+        }    
         private void RemoveStudentLectures()
         {
             var student = GetStudentByPersonalCode();
-            var studentLectures = student.Lectures;
-            int j = 1;
+           
+
             int index;
+          
+            if (student is null)
+            {
+                Console.WriteLine("Student not found");
+                return;
+            }
+            else if (student.Department is null)
+            {
+                Console.WriteLine("Student department is not assigned");
+                return;
+            }
             do
             {
-                Console.WriteLine("Please select lecture to assign, or [0] to go back:");
-                Common.ShowItems(studentLectures);
-                index = Common.IntParse();
-                var lecture = Common.TryGet(studentLectures, index);
+                Console.Clear();
+                Console.WriteLine("Please select lecture to remove, or [0] to go back:");
+                Common.ShowItems(student.Lectures);
+                index = Common.IntParse();             
+                var lecture = Common.TryGetItem(student.Lectures, index);
                 if (lecture is null)
                 {
                     Console.WriteLine("Lecture doesn't exist");
@@ -127,26 +154,34 @@ namespace StudentSystem_Project.UserInterface
                 else
                 {
                     student.Lectures.Remove(lecture);
+                    Console.WriteLine($"{lecture} was removed succesfully");
                 }
-
-            } while (index != -1);
+                Console.WriteLine("Press enter to continue, any key to go back");
+            } while (Console.ReadKey().Key == ConsoleKey.Enter);
             _studentService.AddUpdateStudent(student);
-
-        }
+        }       
+       
         private void AssignStudentToDepartment()
         {
-            if (Disclaimer())
+            if (Common.Disclaimer())
             {
                 return;
             }          
-
             var student = GetStudentByPersonalCode();
             var department = GetDepartment();
-            var isAssigned = _studentService.AssignStudentToDepartment(student, department.Id);
-            if (isAssigned)
+            if (department is not null)
             {
-                Console.WriteLine($"Student assigned successfully to {department.Name}");
+                var isAssigned = _studentService.AssignStudentToDepartment(student, department.Id);
+                if (isAssigned)
+                {
+                    Console.WriteLine($"Student was assigned successfully to {department.Name}");
+                }
             }
+            else
+            {
+                Console.WriteLine("Department not found");
+            }
+            Common.PressAnyKey();
         }
         private Department GetDepartment()
         {
@@ -154,9 +189,12 @@ namespace StudentSystem_Project.UserInterface
             Console.WriteLine("Please select department");
             Common.ShowItems(dbDepartments);
             var s = Common.IntParse();
-            var department = Common.TryGet(dbDepartments, s);
-
-            return _studentService.GetDepartment(department.Id);
+            var department = Common.TryGetItem(dbDepartments, s);
+            if (department is not null)
+            {
+                return _studentService.GetDepartment(department.Id);
+            }
+            return null;
         }
         private Student GetStudent()
         {
@@ -164,7 +202,7 @@ namespace StudentSystem_Project.UserInterface
             Console.WriteLine("Please select student");
             Common.ShowItems(dbStudents);
             var s = Common.IntParse();
-            var student = Common.TryGet(dbStudents, s);
+            var student = Common.TryGetItem(dbStudents, s);
             if (student is null)
             {
                 return null;
@@ -184,19 +222,17 @@ namespace StudentSystem_Project.UserInterface
             {
                 foreach (var lecture in student.Lectures)
                 {
-                    Console.WriteLine($"{lecture}\n");
+                    Console.WriteLine($"{lecture}");
                 }
             }
-           
+            else
+            {
+                Console.WriteLine("Student not found");
+            }
+            Common.PressAnyKey();
+
         }
-        private bool Disclaimer()
-        {
-            Console.BackgroundColor = ConsoleColor.Red;
-            Console.WriteLine("Disclaimer! Changing student department, will couse all student's lectures to be assigned to a department lectures by default");
-            Console.ResetColor();
-            Console.WriteLine("Press escape to cancel");
-            return Console.ReadKey().Key == ConsoleKey.Escape;
-        }
+        
         
     }   
 }

@@ -29,12 +29,13 @@ namespace StudentSystem_BusinessLogic.Services
         }
         public bool AddDepartment(Department department)
         {
-            var isAdded = _dbRepository.IsDepartmentExist(department.Name);
-            if (isAdded)
+            var exist = _dbRepository.IsDepartmentExist(department.Name);
+            if (!exist)
             {
-                AddUpdateDepartment(department);
+                _dbRepository.AddUpdateDepartment(department);
+                _dbRepository.SaveChanges();
             }
-            return isAdded;
+            return exist;
         }
         public bool RemoveDepartment(Department department)
         {
@@ -48,7 +49,8 @@ namespace StudentSystem_BusinessLogic.Services
             var isAdded = _dbRepository.AddLectureToDepartment(department, lecture);
             if (isAdded)
             {
-                AddUpdateDepartment(department);                
+                _dbRepository.AddUpdateDepartment(department);
+                _dbRepository.SaveChanges();
             }
             return isAdded;
           
@@ -58,16 +60,10 @@ namespace StudentSystem_BusinessLogic.Services
             _dbRepository.RemoveDepartmentLecture(department, lecture);
             _dbRepository.SaveChanges();
         }
-        public List<Lecture> GetLectures(Department department) => _dbRepository.RetrieveLectures(department);
+        public List<Lecture> GetDepartmentLectures(Department department) => _dbRepository.RetrieveLectures(department);
         public List<Lecture> GetLectures() => _dbRepository.RetrieveLectures();
         public Department GetDepartment(Guid id) => _dbRepository.RetrieveDepartament(id);
-        public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();
-
-        private void AddUpdateDepartment(Department department)
-        {
-            _dbRepository.AddUpdateDepartment(department);
-            _dbRepository.SaveChanges();
-        }
+        public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();       
         
     }
 }

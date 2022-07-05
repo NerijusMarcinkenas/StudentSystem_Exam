@@ -37,15 +37,20 @@ namespace StudentSystem_Repository.Repositories
         }
         public bool AddUpdateStudent(Student student)
         {
-            if (!_context.Students.Any( n => n.PersonalCode == student.PersonalCode))
+
+            if (!_context.Students.Any( n => n.Id == student.Id) && !_context.Students.Any(n => n.PersonalCode == student.PersonalCode))
             {
                 _context.Students.Add(student);                
                 return true;
             }
+            else if (_context.Students.Any( n => n.PersonalCode == student.PersonalCode))
+            {
+                return false;
+            }
             else
             {
                 _context.Students.Update(student);
-                return false;
+                return true;
             }
            
         }
@@ -64,11 +69,12 @@ namespace StudentSystem_Repository.Repositories
                 .Include( d => d.Department)
                 .Include(l => l.Lectures)
                 .SingleOrDefault( c => c.PersonalCode == student.PersonalCode);
+            var dbDepartment = _context.Departments.SingleOrDefault(d => d.Id == department.Id);
 
             if (dbStudent is not null)
             {
                 dbStudent.Department = department;
-                dbStudent.Lectures = new List<Lecture>();
+                dbStudent.Lectures = department.Lectures;
                 _context.Students.Update(dbStudent);
             }
             else
@@ -77,18 +83,7 @@ namespace StudentSystem_Repository.Repositories
                 _context.Students.Add(student);
             }            
            
-        }      
-        public bool AddStudentToDepartment(Department department, Student student)
-        {
-            var dbDepartment = _context.Departments.Include(s => s.Students).SingleOrDefault(i => i.Id == department.Id);
-            if (dbDepartment.Students.Any( c => c.PersonalCode == student.PersonalCode))
-            {
-                return false;
-            }
-            dbDepartment.Students.Add(student);
-            _context.Departments.Update(dbDepartment);
-            return true;
-        }        
+        }                 
         public bool AddLectureToDepartment(Department department, Lecture lecture)
         {
            var dbDepartament =  _context.Departments.Include(l => l.Lectures).SingleOrDefault(d => d.Id == department.Id);
@@ -145,6 +140,7 @@ namespace StudentSystem_Repository.Repositories
         public bool IsDepartmentExist(string name) => _context.Departments.Any(n => n.Name.ToUpper() == name.ToUpper());
         public void SaveChanges()
         {
+
             _context.SaveChanges();
         }
 

@@ -16,23 +16,30 @@ namespace StudentSystem_Project.UserInterface
         }
         public void OpenMenu()
         {
-            var selected = MainMenu();
-            switch (selected)
+            while (true)
             {
-                case 1:
-                     var sSelection = StudentManagerMenu();
-                    _studentServiceUI.ManageStudent(sSelection);
-                    break;
-                case 2:
-                    var dSelection = DepartmentManagerMenu();
-                    _departmentServiceUI.ManageDepartment(dSelection);
-                    break;
-                case 3:
-                    _departmentServiceUI.CreateLecture();
-                    break;
-                default:
-                    break;
+                Console.Clear();
+                var selected = MainMenu();
+                switch (selected)
+                {
+                    case 1:
+                        Console.Clear();
+                        var sSelection = StudentManagerMenu();
+                        _studentServiceUI.ManageStudent(sSelection);
+                        break;
+                    case 2:
+                        Console.Clear();
+                        var dSelection = DepartmentManagerMenu();
+                        _departmentServiceUI.ManageDepartment(dSelection);
+                        break;
+                    case 3:
+                        _departmentServiceUI.CreateLecture();
+                        break;
+                    default:
+                        break;
+                }
             }
+        
         }
         private static int MainMenu()
         {

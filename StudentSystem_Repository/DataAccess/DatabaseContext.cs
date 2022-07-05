@@ -17,6 +17,7 @@ namespace StudentSystem_Repository.DataAccess
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<Student>().HasIndex(i => i.PersonalCode).IsUnique();
             modelBuilder.Entity<Student>().Property(i => i.Id).HasDefaultValueSql("newid()");
             modelBuilder.Entity<Lecture>().Property(i => i.Id).HasDefaultValueSql("newid()");
             modelBuilder.Entity<Department>().Property(i => i.Id).HasDefaultValueSql("newid()");

@@ -10,8 +10,8 @@ namespace StudentSystem_Repository.Entities
         [Required]
         [Column(TypeName = ("nvarchar(150)"))]
         public string Name { get; set; }
-        public IEnumerable<Department> Departments { get; set; }
-        public IEnumerable<Student> Students { get; set; }
+        public List<Department> Departments { get; set; }
+        public List<Student> Students { get; set; }
 
 
 

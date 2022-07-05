@@ -22,21 +22,27 @@ namespace StudentSystem_Project.UserInterface
             switch (selection)
             {
                 case 1:
+                    Console.Clear();
                     CreateDepartment();
                     break;
                 case 2:
+                    Console.Clear();
                     RemoveDepartment();
                     break;
                 case 3:
+                    Console.Clear();
                     AssignLecturesToDepartment();
                     break;
                 case 4:
+                    Console.Clear();
                     RemoveLecturesFromDepartment();
                     break;
                 case 5:
+                    Console.Clear();
                     ShowStudents();
                     break;
                 case 6:
+                    Console.Clear();
                     ShowLectures();
                     break;
                 default:
@@ -49,13 +55,17 @@ namespace StudentSystem_Project.UserInterface
             var name = Console.ReadLine();
             var lecture = new Lecture(name);
             _departmentService.AddLecture(lecture);
+            Console.WriteLine($"{lecture} lecture created successfully");
+           
         }
         private void CreateDepartment()
         {
             Console.WriteLine("Enter department name");
             var name = Console.ReadLine();
-            var department = new Department(name);
+            var department = new Department(name);            
             _departmentService.AddDepartment(department);
+            Console.WriteLine($"{department} department created successfully");
+            Common.PressAnyKey();
         }
         private void RemoveDepartment()
         {
@@ -63,14 +73,17 @@ namespace StudentSystem_Project.UserInterface
             var dbDepartments = _departmentService.GetDepartments();
             Common.ShowItems(dbDepartments);
             var index = Common.IntParse();
-            var department = Common.TryGet(dbDepartments, index);
+            var department = Common.TryGetItem(dbDepartments, index);
             if (department is not null)
             {
                 _departmentService.RemoveDepartment(department);
-                Console.WriteLine("Department was removed successfully");
-                return;
+                Console.WriteLine("Department was removed successfully");              
             }
-            Console.WriteLine("Department was not found");
+            else
+            {
+                Console.WriteLine("Department was not found");
+            }
+            Common.PressAnyKey();
         }
         private void AssignLecturesToDepartment()
         {
@@ -79,6 +92,7 @@ namespace StudentSystem_Project.UserInterface
             {
                 do
                 {
+                    Console.Clear();
                     Console.WriteLine("Please select lecture to assign:");
                     var lecture = GetLecture();
 
@@ -87,12 +101,11 @@ namespace StudentSystem_Project.UserInterface
                         var isAdded = _departmentService.AddLectureToDepartment(department, lecture);
                         if (isAdded)
                         {
-                            Console.WriteLine("Lecture is added successfully");
-
+                            Console.WriteLine($"{lecture} is added successfully");
                         }
                         else
                         {
-                            Console.WriteLine($"Lecture already exists in {department.Name}");
+                            Console.WriteLine($"{lecture} already exists in {department.Name}");
                         }
                     }
                     Console.WriteLine("Press enter to continue, any key to go back");
@@ -103,10 +116,8 @@ namespace StudentSystem_Project.UserInterface
             else
             {
                 Console.WriteLine("Department not found");
-            }
-
-
-
+                Common.PressAnyKey();
+            }          
         }
         private void RemoveLecturesFromDepartment()
         {
@@ -115,21 +126,22 @@ namespace StudentSystem_Project.UserInterface
             {
                 do
                 {
+                    Console.Clear();
                     Console.WriteLine("Please select lecture to remove:");
-                    var lecture = GetLecture();
+                    var lecture = GetDepartmentLecture(department);
 
                     if (lecture is not null)
                     {
                        _departmentService.RemoveDepartmentLecture(department, lecture);                       
-                        Console.WriteLine("Lecture is added successfully");                       
+                        Console.WriteLine("Lecture is removed successfully");                       
                     }
                     Console.WriteLine("Press enter to continue, any key to go back");
-
                 } while (Console.ReadKey().Key == ConsoleKey.Enter);
             }
             else
             {
                 Console.WriteLine("Department not found");
+                Common.PressAnyKey();
             }
         }
         private void ShowStudents()
@@ -139,6 +151,7 @@ namespace StudentSystem_Project.UserInterface
             {
                 Console.WriteLine(student);
             }
+            Common.PressAnyKey();
         }
         private void ShowLectures()
         {
@@ -151,16 +164,19 @@ namespace StudentSystem_Project.UserInterface
                     Console.WriteLine(lecture) ;
                 }
             }
-            
+            else
+            {
+                Console.WriteLine("Department not found");
+            }
+            Common.PressAnyKey();
         }
-
         private Department GetDepartment()
         {
             var dbDepartments = _departmentService.GetDepartments();
             Console.WriteLine("Please select department");
             Common.ShowItems(dbDepartments);
             var s = Common.IntParse();
-            var department = Common.TryGet(dbDepartments, s);
+            var department = Common.TryGetItem(dbDepartments, s);
 
             return _departmentService.GetDepartment(department.Id);
         }        
@@ -169,8 +185,15 @@ namespace StudentSystem_Project.UserInterface
             var dbLectures = _departmentService.GetLectures();
             Common.ShowItems(dbLectures);
             int s = Common.IntParse();
-            return Common.TryGet(dbLectures, s);
+            return Common.TryGetItem(dbLectures, s);
 
+        }
+        private Lecture GetDepartmentLecture(Department department)
+        {
+            var dbLectures = _departmentService.GetDepartmentLectures(department);
+            Common.ShowItems(dbLectures);
+            int s = Common.IntParse();
+            return Common.TryGetItem(dbLectures, s);
         }
 
     }

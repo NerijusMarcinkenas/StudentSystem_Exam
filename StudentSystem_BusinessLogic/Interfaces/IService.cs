@@ -11,6 +11,6 @@ namespace StudentSystem_BusinessLogic.Interfaces
     {
         public Department GetDepartment(Guid id);    
         public List<Lecture> GetLectures();
-        public List<Lecture> GetLectures(Department department);
+        public List<Lecture> GetDepartmentLectures(Department department);
     }
 }

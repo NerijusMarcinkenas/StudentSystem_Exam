@@ -63,7 +63,7 @@ namespace StudentSystem_Project
                 Console.WriteLine($"[{j++}] - {items[i]}");
             }
         }
-        public static T TryGet<T>(List<T> values, int index)
+        public static T TryGetItem<T>(List<T> values, int index)
         {
             index -= 1;
             T value = default;
@@ -76,6 +76,19 @@ namespace StudentSystem_Project
                 Console.WriteLine("Selection was out of range");
             }
             return value;
+        }
+        public static bool Disclaimer()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Disclaimer! Changing student department, will couse all student's lectures to be assigned to a department lectures by default");
+            Console.ResetColor();
+            Console.WriteLine("Press escape to cancel");
+            return Console.ReadKey().Key == ConsoleKey.Escape;
+        }
+        public static void PressAnyKey()
+        {
+            Console.WriteLine("Press any key to continue");
+            Console.ReadKey();
         }
     }
 }
