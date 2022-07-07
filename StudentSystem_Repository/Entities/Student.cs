@@ -4,16 +4,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 namespace StudentSystem_Repository.Entities
-{
- 
+{ 
     public class Student
     {
         public Guid Id { get; set; }
 
         [Required]
-        [Column(TypeName = "bigint")]
-       
-        public ulong PersonalCode { get; set; }
+        [Column(TypeName = "nvarchar(20)")]       
+        public string PersonalCode { get; set; }
 
         [ForeignKey("Department")]
         public Guid? DepartmentId { get; set; }
@@ -29,7 +27,7 @@ namespace StudentSystem_Repository.Entities
         public Department Department { get; set; } 
         public Student(){}
         
-        public Student(string name, string lastName, ulong personalCode)
+        public Student(string name, string lastName, string personalCode)
         {
             Name = name;
             LastName = lastName;

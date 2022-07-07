@@ -8,12 +8,10 @@ namespace StudentSystem_Repository.Repositories
     public class DbRepository : IStudentRepository, IDepartmentRepository
     {
         private readonly DatabaseContext _context;
-
         public DbRepository()
         {
             _context = new DatabaseContext();
         }
-
         public void AddUpdateDepartment(Department department)
         {
             if (_context.Departments.Any( i => i.Id == department.Id))
@@ -37,20 +35,15 @@ namespace StudentSystem_Repository.Repositories
         }
         public bool AddUpdateStudent(Student student)
         {
-
-            if (!_context.Students.Any( n => n.Id == student.Id) && !_context.Students.Any(n => n.PersonalCode == student.PersonalCode))
+            if (_context.Students.Any(n => n.Id == student.Id))
             {
-                _context.Students.Add(student);                
+                _context.Students.Update(student);                
                 return true;
-            }
-            else if (_context.Students.Any( n => n.PersonalCode == student.PersonalCode))
+            }           
+            else 
             {
+                _context.Students.Add(student);
                 return false;
-            }
-            else
-            {
-                _context.Students.Update(student);
-                return true;
             }
            
         }
@@ -129,7 +122,7 @@ namespace StudentSystem_Repository.Repositories
         {
             return _context.Departments.ToList();
         }
-        public Student RetrieveStudent(ulong studentCode)
+        public Student RetrieveStudent(string studentCode)
         {
             return _context.Students
                 .Include( l => l.Lectures)
@@ -138,9 +131,9 @@ namespace StudentSystem_Repository.Repositories
         }
         public List<Student> RetrieveStudents() => _context.Students.Include(d => d.Department).ToList();
         public bool IsDepartmentExist(string name) => _context.Departments.Any(n => n.Name.ToUpper() == name.ToUpper());
+        public bool IsStudentExist(string personalCode) => _context.Students.Any(c => c.PersonalCode.Equals(personalCode));
         public void SaveChanges()
         {
-
             _context.SaveChanges();
         }
 

@@ -9,6 +9,7 @@ namespace StudentSystem_Repository.Interfaces
         public void AssignStudentToDepartment(Student student, Department department);
         public List<Department> RetrieveDepartments();
         public List<Student> RetrieveStudents();
-        public Student RetrieveStudent(ulong studentCode);
+        public Student RetrieveStudent(string studentCode);
+        bool IsStudentExist(string personalCode);
     }
 }

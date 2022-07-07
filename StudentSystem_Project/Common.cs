@@ -8,30 +8,26 @@ namespace StudentSystem_Project
 {
     internal static class Common
     {
-        public static ulong PersonalCodeParse()
+        public static string PersonalCodeParse()
         {
            
             bool succes = false;
-            ulong parsedCode;
+            string input;
             do
             {
                 Console.Write("Enter Personal Code: ");
-                var input = Console.ReadLine();
-                if (input.Length > 19)
+                input = Console.ReadLine();
+                if (input.Length > 20)
                 {
                     Console.WriteLine("Code is to long");                    
-                }
-                if (!ulong.TryParse(input, out parsedCode))
-                {
-                    Console.WriteLine("Wrong input");                   
-                }
+                }               
                 else
                 {
                     succes = true;
                 }
 
             } while (!succes);
-            return parsedCode;
+            return input;
 
         }
         public static int IntParse()

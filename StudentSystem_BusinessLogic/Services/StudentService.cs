@@ -15,17 +15,19 @@ namespace StudentSystem_BusinessLogic.Services
         }
         public bool AddUpdateStudent(Student student)
         {
-            var isAddedUpdate = _dbRepository.AddUpdateStudent(student);
-            if (isAddedUpdate)
-            {
-                _dbRepository.SaveChanges();
-            }
-            return isAddedUpdate;
+            var isAddedUpdatet = _dbRepository.AddUpdateStudent(student);
+            _dbRepository.SaveChanges();            
+            return isAddedUpdatet;
         }
-        public bool CreateStudent(string name, string lastName, ulong personalCode)
+        public bool CreateStudent(string name, string lastName, string personalCode)
         {
             var student = new Student(name, lastName, personalCode);
-            return AddUpdateStudent(student);
+            if (_dbRepository.IsStudentExist(personalCode))
+            {
+                return false;
+            }
+            AddUpdateStudent(student);
+            return true;
         }
         public bool RemoveStudent(Student student)
         {
@@ -49,9 +51,9 @@ namespace StudentSystem_BusinessLogic.Services
         }
         public Department GetDepartment(Guid id) => _dbRepository.RetrieveDepartament(id);
         public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();
-        public Student GetStudent(ulong personalCode) => _dbRepository.RetrieveStudent(personalCode);
+        public Student GetStudent(string personalCode) => _dbRepository.RetrieveStudent(personalCode);
         public List<Student> GetStudents() => _dbRepository.RetrieveStudents();
-        public List<Lecture> GetLectures() => _dbRepository.RetrieveLectures();
+        public List<Lecture> GetLectures() => _dbRepository.RetrieveLectures();       
         public List<Lecture> GetDepartmentLectures(Department department) => _dbRepository.RetrieveLectures(department);
 
     }

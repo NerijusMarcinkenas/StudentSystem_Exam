@@ -38,7 +38,6 @@ namespace StudentSystem_BusinessLogic.Services
             var isRemoved = _dbRepository.RemoveDepartment(department);
             _dbRepository.SaveChanges();
             return isRemoved;
-
         }
         public bool AddLectureToDepartment(Department department, Lecture lecture)
         {
@@ -54,6 +53,7 @@ namespace StudentSystem_BusinessLogic.Services
         public void RemoveDepartmentLecture(Department department, Lecture lecture)
         {
             _dbRepository.RemoveDepartmentLecture(department, lecture);
+            
             _dbRepository.SaveChanges();
         }
         public List<Lecture> GetDepartmentLectures(Department department) => _dbRepository.RetrieveLectures(department);

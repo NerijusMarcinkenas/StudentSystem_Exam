@@ -6,10 +6,10 @@ namespace StudentSystem_BusinessLogic.Interfaces
     {
         bool AddUpdateStudent(Student student);
         bool AssignStudentToDepartment(Student student, Guid departmentId);
-        bool CreateStudent(string name, string lastName, ulong personalCode);
+        bool CreateStudent(string name, string lastName, string personalCode);
         List<Department> GetDepartments();
-        Student GetStudent(ulong personalCode);
+        Student GetStudent(string personalCode);
         List<Student> GetStudents();
-        bool RemoveStudent(Student student);
+        bool RemoveStudent(Student student);      
     }
 }
