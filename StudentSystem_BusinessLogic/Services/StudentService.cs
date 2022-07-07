@@ -1,12 +1,13 @@
 ﻿using StudentSystem_BusinessLogic.Interfaces;
 using StudentSystem_Repository.Entities;
+using StudentSystem_Repository.Interfaces;
 using StudentSystem_Repository.Repositories;
 
 namespace StudentSystem_BusinessLogic.Services
 {
-    public class StudentService : IService // to do implement IStudentService
+    public class StudentService : IStudentService
     {
-        private DbRepository _dbRepository; // To do Use IDbRepository
+        private IStudentRepository _dbRepository;
 
         public StudentService()
         {
@@ -18,19 +19,19 @@ namespace StudentSystem_BusinessLogic.Services
             if (isAddedUpdate)
             {
                 _dbRepository.SaveChanges();
-            }          
-           return isAddedUpdate;
-        }             
+            }
+            return isAddedUpdate;
+        }
         public bool CreateStudent(string name, string lastName, ulong personalCode)
         {
             var student = new Student(name, lastName, personalCode);
-            return  AddUpdateStudent(student);             
+            return AddUpdateStudent(student);
         }
         public bool RemoveStudent(Student student)
         {
             if (_dbRepository.RemoveStudent(student))
             {
-                _dbRepository.SaveChanges();               
+                _dbRepository.SaveChanges();
                 return true;
             }
             return false;
@@ -44,14 +45,14 @@ namespace StudentSystem_BusinessLogic.Services
                 _dbRepository.SaveChanges();
                 return true;
             }
-            return false;            
-        }               
+            return false;
+        }
         public Department GetDepartment(Guid id) => _dbRepository.RetrieveDepartament(id);
         public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();
         public Student GetStudent(ulong personalCode) => _dbRepository.RetrieveStudent(personalCode);
         public List<Student> GetStudents() => _dbRepository.RetrieveStudents();
         public List<Lecture> GetLectures() => _dbRepository.RetrieveLectures();
         public List<Lecture> GetDepartmentLectures(Department department) => _dbRepository.RetrieveLectures(department);
-       
+
     }
 }

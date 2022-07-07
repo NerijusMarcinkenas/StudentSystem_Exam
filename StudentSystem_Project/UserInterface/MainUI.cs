@@ -1,18 +1,18 @@
 ﻿using StudentSystem_BusinessLogic.Services;
+using StudentSystem_Project.Interfaces;
 using StudentSystem_Repository.Entities;
 
 namespace StudentSystem_Project.UserInterface
 {
-    public class UserInterface
+    public class MainUI : IMainUI
     {
-        private readonly DepartmentServiceUI _departmentServiceUI;
-        private readonly StudentServiceUI _studentServiceUI;
-     
-  
-        public UserInterface()
+        private readonly IDepartmentUI _departmentServiceUI;
+        private readonly IStudentUI _studentServiceUI;
+
+        public MainUI()
         {
-            _departmentServiceUI = new DepartmentServiceUI();
-            _studentServiceUI = new StudentServiceUI();
+            _departmentServiceUI = new DepartmentUI();
+            _studentServiceUI = new StudentUI();
         }
         public void OpenMenu()
         {
@@ -39,7 +39,7 @@ namespace StudentSystem_Project.UserInterface
                         break;
                 }
             }
-        
+
         }
         private static int MainMenu()
         {
@@ -59,8 +59,8 @@ namespace StudentSystem_Project.UserInterface
                 "[4] - Remove student lectures\n" +
                 "[5] - Assign student to department\n" +
                 "[6] - Show student lectures");
-           return Common.IntParse();
-        }              
+            return Common.IntParse();
+        }
         private static int DepartmentManagerMenu()
         {
             Console.WriteLine("" +
@@ -72,6 +72,7 @@ namespace StudentSystem_Project.UserInterface
                 "[6] - Show lectures");
             return Common.IntParse();
         }
+
 
     }
 }

@@ -1,17 +1,13 @@
 ﻿using StudentSystem_BusinessLogic.Interfaces;
 using StudentSystem_Repository.Entities;
+using StudentSystem_Repository.Interfaces;
 using StudentSystem_Repository.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentSystem_BusinessLogic.Services
 {
-    public class DepartmentService : IService
+    public class DepartmentService : IDepartmentService
     {
-        private readonly DbRepository _dbRepository;
+        private readonly IDepartmentRepository _dbRepository;
 
         public DepartmentService()
         {
@@ -20,11 +16,11 @@ namespace StudentSystem_BusinessLogic.Services
 
         public bool AddLecture(Lecture lecture)
         {
-            var isAdded = _dbRepository.AddLecture(lecture);
+            var isAdded = _dbRepository.AddLectureToDb(lecture);
             if (isAdded)
             {
-                _dbRepository.SaveChanges();               
-            }          
+                _dbRepository.SaveChanges();
+            }
             return isAdded;
         }
         public bool AddDepartment(Department department)
@@ -53,7 +49,7 @@ namespace StudentSystem_BusinessLogic.Services
                 _dbRepository.SaveChanges();
             }
             return isAdded;
-          
+
         }
         public void RemoveDepartmentLecture(Department department, Lecture lecture)
         {
@@ -63,7 +59,7 @@ namespace StudentSystem_BusinessLogic.Services
         public List<Lecture> GetDepartmentLectures(Department department) => _dbRepository.RetrieveLectures(department);
         public List<Lecture> GetLectures() => _dbRepository.RetrieveLectures();
         public Department GetDepartment(Guid id) => _dbRepository.RetrieveDepartament(id);
-        public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();       
-        
+        public List<Department> GetDepartments() => _dbRepository.RetrieveDepartments();
+
     }
 }

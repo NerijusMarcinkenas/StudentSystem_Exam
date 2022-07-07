@@ -39,7 +39,11 @@ namespace StudentSystem_Repository.Entities
 
         public override string ToString()
         {
-            return $"{Name} {LastName} persnoal code - ({PersonalCode}) from {Department.Name} department";
+            if (Department is null)
+            {
+                return $"{Name} {LastName} personal code - ({PersonalCode}) is not assigned to department";
+            }
+            return $"{Name} {LastName} personal code - ({PersonalCode}) from {Department.Name} department";
         }
     }
 }

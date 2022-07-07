@@ -1,18 +1,15 @@
-﻿using StudentSystem_BusinessLogic.Services;
+﻿using StudentSystem_BusinessLogic.Interfaces;
+using StudentSystem_BusinessLogic.Services;
+using StudentSystem_Project.Interfaces;
 using StudentSystem_Repository.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace StudentSystem_Project.UserInterface
 {
-    public class DepartmentServiceUI
+    public class DepartmentUI : IDepartmentUI
     {
-        private DepartmentService _departmentService;
+        private IDepartmentService _departmentService;
 
-        public DepartmentServiceUI()
+        public DepartmentUI()
         {
             _departmentService = new DepartmentService();
         }
@@ -54,9 +51,18 @@ namespace StudentSystem_Project.UserInterface
             Console.Write("Enter lecture name: ");
             var name = Console.ReadLine();
             var lecture = new Lecture(name);
-            _departmentService.AddLecture(lecture);
-            Console.WriteLine($"{lecture} lecture created successfully");
-           
+            var adedd = _departmentService.AddLecture(lecture);
+            if (!adedd)
+            {
+                Console.WriteLine("Lecture already exist");
+                
+            }
+            else
+            {
+                Console.WriteLine($"{lecture} lecture created successfully");
+            }
+            
+            Common.PressAnyKey();
         }
         private void CreateDepartment()
         {
@@ -158,10 +164,11 @@ namespace StudentSystem_Project.UserInterface
             var department = GetDepartment();
             if (department is not null)
             {
+                int j = 1;
                 Console.WriteLine($"{department.Name} lectures:");
                 foreach (var lecture in department.Lectures)
                 {                    
-                    Console.WriteLine(lecture) ;
+                    Console.WriteLine($"[{j++}] - {lecture}") ;
                 }
             }
             else

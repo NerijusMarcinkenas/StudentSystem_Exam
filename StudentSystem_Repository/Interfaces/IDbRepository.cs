@@ -3,9 +3,11 @@
 namespace StudentSystem_Repository.Interfaces
 {
     public interface IDbRepository
-    {
-        void UpdateDepartament(Department department);
-
+    {       
+        public List<Lecture> RetrieveLectures();
+        public List<Lecture> RetrieveLectures(Department department);
+        public Department RetrieveDepartament(Guid id);      
+        public void SaveChanges();
 
     }
 }

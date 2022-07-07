@@ -82,8 +82,8 @@ namespace StudentSystem_Project
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("Disclaimer! Changing student department, will couse all student's lectures to be assigned to a department lectures by default");
             Console.ResetColor();
-            Console.WriteLine("Press escape to cancel");
-            return Console.ReadKey().Key == ConsoleKey.Escape;
+            Console.WriteLine("Press enter to continue or any key to cancel");
+            return Console.ReadKey().Key == ConsoleKey.Enter;
         }
         public static void PressAnyKey()
         {

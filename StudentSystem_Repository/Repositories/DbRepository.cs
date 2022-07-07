@@ -4,8 +4,8 @@ using StudentSystem_Repository.Entities;
 using StudentSystem_Repository.Interfaces;
 
 namespace StudentSystem_Repository.Repositories
-{    
-    public class DbRepository //To do Implement IDbRepository
+{
+    public class DbRepository : IStudentRepository, IDepartmentRepository
     {
         private readonly DatabaseContext _context;
 
@@ -64,7 +64,7 @@ namespace StudentSystem_Repository.Repositories
             return false;
         }
         public void AssignStudentToDepartment(Student student, Department department)
-        {    
+        {           
             var dbStudent = _context.Students
                 .Include( d => d.Department)
                 .Include(l => l.Lectures)
@@ -101,7 +101,7 @@ namespace StudentSystem_Repository.Repositories
             dbDepartment.Lectures.Remove(lecture);
             _context.Departments.Update(dbDepartment);
         }
-        public bool AddLecture(Lecture lecture)
+        public bool AddLectureToDb(Lecture lecture)
         {
             if (_context.Lectures.Any(l => l.Name.ToUpper() == lecture.Name.ToUpper()))
             {
