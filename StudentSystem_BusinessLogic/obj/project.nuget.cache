@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "QYgtzGJWZL99FroIj955m70Eq5KLvJKllzKVIIifxEYGjGtCMvFITOWD+5M9rx2HULSO/r3FGTGbTjA8M7u59A==",
+  "dgSpecHash": "ZW9U+aM27WVTZBxMfmNgWkaupobD79yYhy0Iyfo2o3fi6sSq/dzGOUQOCtXanFpUTKaKeRzzK2RIb69Dx7sT3w==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj",
+  "projectFilePath": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nerki\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\nerki\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.4\\microsoft.data.sqlclient.2.1.4.nupkg.sha512",

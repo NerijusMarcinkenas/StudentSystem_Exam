@@ -1870,11 +1870,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
+      "projectUniqueName": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
       "projectName": "StudentSystem_Project",
-      "projectPath": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
+      "projectPath": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
       "packagesPath": "C:\\Users\\nerki\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\obj\\",
+      "outputPath": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -1895,8 +1895,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj": {
-              "projectPath": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj"
+            "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj": {
+              "projectPath": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_BusinessLogic\\StudentSystem_BusinessLogic.csproj"
             }
           }
         }

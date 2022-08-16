@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NEMXM/wh58BCTtPS6RLEIC2KQ6rxPqYscRuzZW17FJ8N0v4zApYPVL5KUls+Jmt+dDfUTgW89W1B9EjftWl5sA==",
+  "dgSpecHash": "N6yOsYI4kM1Smouchz8yvfkCIxNI/F5Qs6Xo4uwpjGSDDgbK+wUKNR2zMpilPEEnFtWOyVjr57Bic0wlszyNKA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\nerki\\Documents\\.NET kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
+  "projectFilePath": "C:\\Users\\nerki\\Documents\\Programming kursai\\Database_Exam\\StudentSystem_Exam\\StudentSystem_Project\\StudentSystem_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\nerki\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\nerki\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
