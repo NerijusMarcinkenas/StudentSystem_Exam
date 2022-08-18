@@ -12,3 +12,17 @@ C:\Users\nerki\Documents\.NET kursai\Database_Exam\StudentSystem_Exam\StudentSys
 C:\Users\nerki\Documents\.NET kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.pdb
 C:\Users\nerki\Documents\.NET kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.genruntimeconfig.cache
 C:\Users\nerki\Documents\.NET kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\ref\StudentSystem_Repository.dll
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\bin\Debug\net6.0\StudentSystem_Repository.deps.json
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\bin\Debug\net6.0\StudentSystem_Repository.runtimeconfig.json
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\bin\Debug\net6.0\StudentSystem_Repository.dll
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\bin\Debug\net6.0\StudentSystem_Repository.pdb
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.csproj.AssemblyReference.cache
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.AssemblyInfoInputs.cache
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.AssemblyInfo.cs
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.csproj.CoreCompileInputs.cache
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.dll
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\refint\StudentSystem_Repository.dll
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.pdb
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\StudentSystem_Repository.genruntimeconfig.cache
+C:\Users\nerki\Documents\Programming kursai\Database_Exam\StudentSystem_Exam\StudentSystem_Repository\obj\Debug\net6.0\ref\StudentSystem_Repository.dll
